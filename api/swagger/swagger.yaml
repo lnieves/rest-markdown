@@ -1,0 +1,91 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Markdown Storage/Processor App
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /markdown:
+    x-swagger-router-controller: markdown
+    put:
+      consumes: 
+        - "text/plain; charset=utf-8"
+      description: Saves markdown text and converted HTML to Persistent Storage
+      operationId: saveMarkdown
+      parameters:
+        - name: markdown
+          in: formData
+          required: true
+          type: string
+      responses:
+        "201":
+          description: Document created
+          schema:
+            $ref: "#/definitions/StoreResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+                
+  /markdown/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: markdown
+    get:
+      description: Returns markdown and associated HTML
+      # used as the method name of the controller
+      operationId: getMarkdown
+      parameters:
+        - name: id
+          in: path
+          description: ID of the markdown Document
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/MarkdownResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  StoreResponse:
+    required:
+      - url
+    properties:
+      url:
+        type: string
+  MarkdownResponse:
+    required:
+      - source
+      - html
+    properties:
+      source:
+        type: string
+      html:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
