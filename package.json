@@ -1,22 +1,43 @@
 {
   "name": "rest-markdown",
-  "version": "0.0.1",
-  "private": true,
-  "description": "New Swagger API Project",
-  "keywords": [],
-  "author": "",
-  "license": "",
-  "main": "app.js",
+  "description": "",
+  "version": "1.0.0",
+  "author": "Larry Nieves <lanieves@gmail.com>",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lnieves/rest-markdown.git"
+  },
+  "bugs": "http://github.com/lnieves/rest-markdown/issues",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "dependencies": {
-    "hapi": "^10.0.0",
-    "swagger-hapi": "^0.1.0"
+    "hapi": "^15.2.0",
+    "hapi-mongodb": "^6.2.0",
+    "swaggerize-hapi": "^2.0.0-",
+    "swagmock": "~0.0.2"
   },
   "devDependencies": {
-    "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "eslint": "^2",
+    "is-my-json-valid": "^2.13.1",
+    "istanbul": "~0.4.3",
+    "js-yaml": "^3.2.6",
+    "nodemon": "^1.11.0",
+    "supertest": "^1.2.0",
+    "swagger-parser": "^3.4.1",
+    "tape": "^4"
   },
   "scripts": {
-    "start": "node app.js",
-    "test": "swagger project test"
-  }
+    "test": "tape 'tests/**/*.js'",
+    "cover": "istanbul cover tape -- 'tests/**/*.js'",
+    "lint": "eslint .",
+    "watch": "nodemon server.js",
+    "start": "node server.js",
+    "regenerate": "yo swaggerize:test --framework hapi --apiPath './config/swagger.yaml'"
+  },
+  "generator-swaggerize": {
+    "version": "3.1.0"
+  },
+  "main": "./server"
 }

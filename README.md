@@ -1,1 +1,3 @@
-# Skeleton project for Swagger
+# rest-markdown
+
+Swagger api [location](./config/swagger.yaml)

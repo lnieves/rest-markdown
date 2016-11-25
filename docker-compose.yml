@@ -1,0 +1,19 @@
+version: "2"
+services: 
+    markdown:
+        image: node:6
+        working_dir: /usr/src/app
+        command:
+            - npm
+            - run
+            - watch
+        volumes: 
+            - .:/usr/src/app
+        ports:
+            - "10010:10010"
+        links:
+            - mongo
+        environment:
+            DEBUG: "*:*"
+    mongo:
+        image: mongo:3.2
