@@ -15,6 +15,7 @@
   "dependencies": {
     "hapi": "^15.2.0",
     "hapi-mongodb": "^6.2.0",
+    "highland": "^2.10.1",
     "swaggerize-hapi": "^2.0.0-",
     "swagmock": "~0.0.2"
   },
@@ -34,12 +35,15 @@
     "test": "mocha --harmony 'tests/lib/**/*.js'",
     "cover": "istanbul cover tape -- 'tests/**/*.js'",
     "lint": "eslint .",
-    "watch": "nodemon server.js",
-    "start": "node server.js",
+    "watch": "nodemon --harmony  server.js",
+    "start": "node --harmony server.js",
     "regenerate": "yo swaggerize:test --framework hapi --apiPath './config/swagger.yaml'"
   },
   "generator-swaggerize": {
     "version": "3.1.0"
   },
-  "main": "./server"
+  "main": "./server",
+  "jshintConfig": {
+      "esversion": 6
+  }
 }

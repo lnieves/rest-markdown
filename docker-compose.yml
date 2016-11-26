@@ -24,3 +24,5 @@ services:
         image: mongo:3.2
         volumes_from:
             - storage
+        ports:
+            - "27017:27017"
