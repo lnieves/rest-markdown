@@ -7,7 +7,7 @@ services:
             - npm
             - run
             - watch
-        volumes: 
+        volumes:
             - .:/usr/src/app
         ports:
             - "10010:10010"
@@ -15,5 +15,12 @@ services:
             - mongo
         environment:
             DEBUG: "*:*"
+    storage:
+        image: busybox
+        command: mkdir -p /data/db
+        volumes:
+            - /data/db
     mongo:
         image: mongo:3.2
+        volumes_from:
+            - storage
