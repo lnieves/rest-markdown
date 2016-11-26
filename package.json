@@ -16,6 +16,7 @@
     "hapi": "^15.2.0",
     "hapi-mongodb": "^6.2.0",
     "highland": "^2.10.1",
+    "inert": "^4.0.2",
     "swaggerize-hapi": "^2.0.0-",
     "swagmock": "~0.0.2"
   },
@@ -44,6 +45,6 @@
   },
   "main": "./server",
   "jshintConfig": {
-      "esversion": 6
+    "esversion": 6
   }
 }

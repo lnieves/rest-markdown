@@ -4,6 +4,7 @@ const Hapi = require('hapi'),
     Swaggerize = require('swaggerize-hapi'),
     Path = require('path'),
     mongo = require('hapi-mongodb'),
+    Inert = require('inert'),
     Markdown = require('./plugins/markdown');
 
 const Server = new Hapi.Server();
@@ -28,6 +29,19 @@ Server.register(Markdown, (error) => {
     if (error) throw error;
 });
 
+Server.register(Inert, () => {
+    Server.route({
+        method: 'GET',
+        path: '/api/{param*}',
+        handler: {
+            directory: {
+                path: './swagger-ui-2.2.8/dist',
+                redirectToSlash: true,
+                index: true
+            }
+        }
+    });
+});
 Server.register({
     register: Swaggerize,
     options: {
