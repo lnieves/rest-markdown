@@ -19,10 +19,10 @@ module.exports = {
         const db = req.server.plugins['hapi-mongodb'].db;
         const doc = {
             source: req.payload.markdown,
-            html: req.payload.markdown
+            html: req.payload.html
         };
         db.collection('docs').insert(doc, (error, result) => {
-            if(error) throw error;
+            if (error) throw error;
 
             const response = {
                 url: req.server.info.host + ':' + req.server.info.port + '/markdown/' + result.ops.pop()._id

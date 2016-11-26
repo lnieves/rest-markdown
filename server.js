@@ -3,7 +3,8 @@
 const Hapi = require('hapi'),
     Swaggerize = require('swaggerize-hapi'),
     Path = require('path'),
-    mongo = require('hapi-mongodb');
+    mongo = require('hapi-mongodb'),
+    Markdown = require('./plugins/markdown');
 
 const Server = new Hapi.Server();
 
@@ -21,6 +22,10 @@ Server.register({
         console.log(error);
         process.exit(2);
     }
+});
+
+Server.register(Markdown, (error) => {
+    if (error) throw error;
 });
 
 Server.register({
