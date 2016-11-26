@@ -60,4 +60,15 @@ describe('MarkdownHtml', () => {
             parser.inlineWrap(fixture[0]).should.equal(fixture[1]);
         });
     });
+     it('Generates Links', () => {
+         const fixtures = [
+             ['[Model-View-Controller (MVC)](http://en.wikipedia.org/wiki/Model-view-controller)',
+                '<a href="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller (MVC)</a>'],
+            [ '[README](activerecord/README.rdoc)', '<a href="activerecord/README.rdoc">README</a>']
+         ];
+         fixtures.forEach((fixture) => {
+             parser.parseLinks(fixture[0]).should.equal(fixture[1]);
+         });
+
+     });
 });

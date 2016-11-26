@@ -6,7 +6,9 @@ const register  = (server, options, next) => {
         if (!request.payload) return reply.continue();
 
         const processor = new MarkdownHtml();
-        request.payload.html = processor.process(request.payload.markdown);
+        const html = processor.process(request.payload.markdown);
+        console.log('html is %s', html);
+        request.payload.html = html;
 
         return reply.continue();
     });
