@@ -3,10 +3,7 @@ services:
     markdown:
         image: node:6
         working_dir: /usr/src/app
-        command:
-            - npm
-            - run
-            - watch
+        command: npm run watch
         volumes:
             - .:/usr/src/app
         ports:

@@ -36,8 +36,8 @@
     "test": "mocha --harmony 'tests/lib/**/*.js'",
     "cover": "istanbul cover tape -- 'tests/**/*.js'",
     "lint": "eslint .",
-    "watch": "nodemon --harmony  server.js",
-    "start": "node --harmony server.js",
+    "watch": "npm install && nodemon --harmony  server.js",
+    "start": "npm install && node --harmony server.js",
     "regenerate": "yo swaggerize:test --framework hapi --apiPath './config/swagger.yaml'"
   },
   "generator-swaggerize": {
