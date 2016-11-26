@@ -68,6 +68,7 @@ vary: accept-encoding
     "html": "<html><body><h1>Welcome to Rails</h1>...",
     "source":# Welcome to Rails..."
 }
+```
 
 Response is a JSON document containing both the original markdown source and the
 converted HTML.
