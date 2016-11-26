@@ -1,5 +1,4 @@
 'use strict';
-var dataProvider = require('../data/markdown.js');
 /**
  * Operations on /markdown
  */
@@ -11,19 +10,24 @@ module.exports = {
      * produces: 
      * responses: 201, default
      */
-    put: function saveMarkdown(req, reply, next) {
+    put: (req, reply, next) => {
         /**
          * Get the data for response 201
          * For response `default` status 200 is used.
          */
-        var status = 201;
-        var provider = dataProvider['put']['201'];
-        provider(req, reply, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            reply(data && data.responses).code(status);
+        const status = 201;
+        const db = req.server.plugins['hapi-mongodb'].db;
+        const doc = {
+            source: req.payload.markdown,
+            html: req.payload.markdown
+        };
+        db.collection('docs').insert(doc, (error, result) => {
+            if(error) throw error;
+
+            const response = {
+                url: req.server.info.host + ':' + req.server.info.port + '/markdown/' + result.ops.pop()._id
+            };
+            reply(response).code(status);
         });
     }
 };
